@@ -79,13 +79,24 @@ final class TodoListViewController: UIViewController {
     }
     
     private func setupAddItemButton() {
-        let button = AddItemButtonView(onTap: onAddItemButtonTap)
-        view.addSubview(button)
+        let clearView = ClearView()
+        clearView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let button = TodoButtonView(
+            iconName: "plus_icon",
+            size: 56,
+            onTap: onAddItemButtonTap
+        )
+        view.addSubview(clearView)
+        clearView.addSubview(button)
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: view.topAnchor),
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            clearView.topAnchor.constraint(equalTo: view.topAnchor),
+            clearView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            clearView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            clearView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            button.trailingAnchor.constraint(equalTo: clearView.trailingAnchor, constant: -16),
+            button.bottomAnchor.constraint(equalTo: clearView.bottomAnchor, constant: -40)
         ])
     }
     
